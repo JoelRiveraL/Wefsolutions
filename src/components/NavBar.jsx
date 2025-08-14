@@ -1,8 +1,14 @@
 import React from "react";
 import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 export const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
+
+  const isActive = (path) => {
+    return location.pathname === path;
+  };
 
   return (
     <div>
@@ -11,42 +17,66 @@ export const NavBar = () => {
           <div className="flex items-center h-16 relative">
             {/* Logo */}
             <div className="flex items-center space-x-2 absolute left-4">
-              <h1 className="text-4xl font-bold text-[#074F6C]">
+              <Link to="/" className="text-4xl font-bold text-[#074F6C] hover:text-[#0a5f7a] transition-colors duration-300">
                 Wefsolution
-              </h1>
+              </Link>
             </div>
 
             {/* Desktop Menu - Centered */}
             <div className="hidden md:flex justify-center flex-1">
               <div className="flex items-center space-x-8">
-                <a
-                  href="#"
-                  className="text-[#074F6C] hover:text-[#074F6C] transition-all duration-300 relative group"
+                <Link
+                  to="/"
+                  className={`transition-all duration-300 relative group ${
+                    isActive('/') 
+                      ? 'text-[#074F6C] font-semibold' 
+                      : 'text-[#074F6C] hover:text-[#0a5f7a]'
+                  }`}
                 >
                   Inicio
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#074F6C] transition-all duration-300 group-hover:w-full"></span>
-                </a>
-                <a
-                  href="#"
-                  className="text-[#074F6C] hover:text-[#074F6C] transition-all duration-300 relative group"
+                  <span className={`absolute -bottom-1 left-0 h-0.5 bg-[#074F6C] transition-all duration-300 ${
+                    isActive('/') ? 'w-full' : 'w-0 group-hover:w-full'
+                  }`}></span>
+                </Link>
+                <Link
+                  to="/servicios"
+                  className={`transition-all duration-300 relative group ${
+                    isActive('/servicios') 
+                      ? 'text-[#074F6C] font-semibold' 
+                      : 'text-[#074F6C] hover:text-[#0a5f7a]'
+                  }`}
                 >
                   Servicios
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#074F6C] transition-all duration-300 group-hover:w-full"></span>
-                </a>
-                <a
-                  href="#"
-                  className="text-[#074F6C] hover:text-[#074F6C] transition-all duration-300 relative group"
+                  <span className={`absolute -bottom-1 left-0 h-0.5 bg-[#074F6C] transition-all duration-300 ${
+                    isActive('/servicios') ? 'w-full' : 'w-0 group-hover:w-full'
+                  }`}></span>
+                </Link>
+                <Link
+                  to="/acerca-de"
+                  className={`transition-all duration-300 relative group ${
+                    isActive('/acerca-de') 
+                      ? 'text-[#074F6C] font-semibold' 
+                      : 'text-[#074F6C] hover:text-[#0a5f7a]'
+                  }`}
                 >
                   Acerca de
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#074F6C] transition-all duration-300 group-hover:w-full"></span>
-                </a>
-                <a
-                  href="#"
-                  className="text-[#074F6C] hover:text-[#074F6C] transition-all duration-300 relative group"
+                  <span className={`absolute -bottom-1 left-0 h-0.5 bg-[#074F6C] transition-all duration-300 ${
+                    isActive('/acerca-de') ? 'w-full' : 'w-0 group-hover:w-full'
+                  }`}></span>
+                </Link>
+                <Link
+                  to="/contacto"
+                  className={`transition-all duration-300 relative group ${
+                    isActive('/contacto') 
+                      ? 'text-[#074F6C] font-semibold' 
+                      : 'text-[#074F6C] hover:text-[#0a5f7a]'
+                  }`}
                 >
                   Contacto
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#074F6C] transition-all duration-300 group-hover:w-full"></span>
-                </a>
+                  <span className={`absolute -bottom-1 left-0 h-0.5 bg-[#074F6C] transition-all duration-300 ${
+                    isActive('/contacto') ? 'w-full' : 'w-0 group-hover:w-full'
+                  }`}></span>
+                </Link>
               </div>
             </div>
 
@@ -88,34 +118,50 @@ export const NavBar = () => {
           {isMenuOpen && (
             <div className="md:hidden">
               <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white/90 backdrop-blur-md border-t border-gray-200/50">
-                <a
-                  href="#"
-                  className="block px-3 py-3 text-[#074F6C] hover:text-[#074F6C] hover:bg-blue-50 rounded-lg transition-all duration-300 relative group"
+                <Link
+                  to="/"
+                  onClick={() => setIsMenuOpen(false)}
+                  className={`block px-3 py-3 rounded-lg transition-all duration-300 relative group ${
+                    isActive('/') 
+                      ? 'text-[#074F6C] bg-blue-50 font-semibold' 
+                      : 'text-[#074F6C] hover:text-[#0a5f7a] hover:bg-blue-50'
+                  }`}
                 >
                   Inicio
-                  <span className="absolute -bottom-1 left-3 w-0 h-0.5 bg-[#074F6C] transition-all duration-300 group-hover:w-[calc(100%-24px)]"></span>
-                </a>
-                <a
-                  href="#"
-                  className="block px-3 py-3 text-[#074F6C] hover:text-[#074F6C] hover:bg-blue-50 rounded-lg transition-all duration-300 relative group"
+                </Link>
+                <Link
+                  to="/servicios"
+                  onClick={() => setIsMenuOpen(false)}
+                  className={`block px-3 py-3 rounded-lg transition-all duration-300 relative group ${
+                    isActive('/servicios') 
+                      ? 'text-[#074F6C] bg-blue-50 font-semibold' 
+                      : 'text-[#074F6C] hover:text-[#0a5f7a] hover:bg-blue-50'
+                  }`}
                 >
                   Servicios
-                  <span className="absolute -bottom-1 left-3 w-0 h-0.5 bg-[#074F6C] transition-all duration-300 group-hover:w-[calc(100%-24px)]"></span>
-                </a>
-                <a
-                  href="#"
-                  className="block px-3 py-3 text-[#074F6C] hover:text-[#074F6C] hover:bg-blue-50 rounded-lg transition-all duration-300 relative group"
+                </Link>
+                <Link
+                  to="/acerca-de"
+                  onClick={() => setIsMenuOpen(false)}
+                  className={`block px-3 py-3 rounded-lg transition-all duration-300 relative group ${
+                    isActive('/acerca-de') 
+                      ? 'text-[#074F6C] bg-blue-50 font-semibold' 
+                      : 'text-[#074F6C] hover:text-[#0a5f7a] hover:bg-blue-50'
+                  }`}
                 >
                   Acerca de
-                  <span className="absolute -bottom-1 left-3 w-0 h-0.5 bg-[#074F6C] transition-all duration-300 group-hover:w-[calc(100%-24px)]"></span>
-                </a>
-                <a
-                  href="#"
-                  className="block px-3 py-3 text-[#074F6C] hover:text-[#074F6C] hover:bg-blue-50 rounded-lg transition-all duration-300 relative group"
+                </Link>
+                <Link
+                  to="/contacto"
+                  onClick={() => setIsMenuOpen(false)}
+                  className={`block px-3 py-3 rounded-lg transition-all duration-300 relative group ${
+                    isActive('/contacto') 
+                      ? 'text-[#074F6C] bg-blue-50 font-semibold' 
+                      : 'text-[#074F6C] hover:text-[#0a5f7a] hover:bg-blue-50'
+                  }`}
                 >
                   Contacto
-                  <span className="absolute -bottom-1 left-3 w-0 h-0.5 bg-[#074F6C] transition-all duration-300 group-hover:w-[calc(100%-24px)]"></span>
-                </a>
+                </Link>
                 <button className="w-full text-left px-3 py-3 bg-gradient-to-r from-[#10b981] to-[#10b981] text-white rounded-lg hover:from-[#074F6C] hover:to-[#074F6C] transition-all duration-300 font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
                   Iniciar Sesión
                 </button>
@@ -126,4 +172,4 @@ export const NavBar = () => {
       </nav>
     </div>
   );
-};  
+};

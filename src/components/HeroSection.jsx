@@ -1,6 +1,16 @@
 import React from 'react';
 
 export const HeroSection = () => {
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
+  
   return (
     <div>
       {/* Hero Section */}
@@ -19,7 +29,10 @@ export const HeroSection = () => {
               Con soluciones inteligentes, wefSolution integra software de última generación y análisis de datos para impulsar la eficiencia operativa y fortalecer la toma de decisiones, permitiendo que su equipo se concentre en generar valor estratégico.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 items-start">
-                <button className="group bg-white text-blue-600 px-10 py-4 rounded-2xl text-lg font-semibold hover:bg-blue-50 hover:text-blue-700 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 flex items-center space-x-2">
+                <button 
+                  onClick={() => scrollToSection('licences')}
+                  className="group bg-white text-blue-600 px-10 py-4 rounded-2xl text-lg font-semibold hover:bg-blue-50 hover:text-blue-700 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 flex items-center space-x-2 cursor-pointer"
+                >
                   <span>Explorar más</span>
                   <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />

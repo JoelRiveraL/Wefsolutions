@@ -104,7 +104,7 @@ export const FeaturesSection = ({ isOpenService, value }) => {
   };
 
   return (
-    <div>
+    <div id="licences" >
       {/* Features Section */}
       <div className="relative overflow-hidden max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-24">
         {/* Blobs */}

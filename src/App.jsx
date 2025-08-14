@@ -1,33 +1,28 @@
 import './App.css'
-import { ContactanosForm } from './components/ContactanosForm.jsx'
-import { FeaturesSection } from './components/FeaturesSection.jsx'
-import { Footer } from './components/Footer.jsx'
-import { HeroSection } from './components/HeroSection.jsx'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { NavBar } from './components/NavBar.jsx'
-import { PerimetralSecurity } from './components/PerimetralSecurity.jsx'
-import { useState } from 'react'
-import { ServiceDetails } from './components/ServiceDetails.jsx'
+import { Footer } from './components/Footer.jsx'
+import { Home } from './pages/Home.jsx'
+import { Servicios } from './pages/Servicios.jsx'
+import { AcercaDe } from './pages/AcercaDe.jsx'
+import { Contacto } from './pages/Contacto.jsx'
 
 function App() {
-  const [isOpenServices, setIsOpenServices] = useState("")
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
-      <NavBar />
+    <Router>
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
+        <NavBar />
+        
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/servicios" element={<Servicios />} />
+          <Route path="/acerca-de" element={<AcercaDe />} />
+          <Route path="/contacto" element={<Contacto />} />
+        </Routes>
 
-      <HeroSection />
-
-      <FeaturesSection isOpenService={setIsOpenServices} value={isOpenServices} />
-      {isOpenServices != "" && (
-        <ServiceDetails isOpenService={setIsOpenServices} value={ isOpenServices} />
-      )}
-
-      <PerimetralSecurity />
-
-      <ContactanosForm />
-
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </Router>
   )
 }
 

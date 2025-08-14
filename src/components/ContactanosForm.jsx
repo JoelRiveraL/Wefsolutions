@@ -1,14 +1,39 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 
 export const ContactanosForm = () => {
+  const location = useLocation()
   const [formData, setFormData] = useState({
     nombres: '',
     apellidos: '',
     telefono: '',
-    email: ''
+    email: '',
+    mensaje: ''
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Manejar navegación desde otros componentes
+  useEffect(() => {
+    if (location.state?.scrollToContact) {
+      setTimeout(() => {
+        const contactElement = document.getElementById('contact-form')
+        if (contactElement) {
+          contactElement.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+          })
+        }
+        
+        if (location.state.productInfo) {
+          setFormData(prev => ({
+            ...prev,
+            mensaje: `Estoy interesado en obtener una licencia de ${location.state.productInfo}. Me gustaría recibir más información sobre precios, características y proceso de compra.`
+          }))
+        }
+      }, 500)
+    }
+  }, [location.state])
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,24 +47,23 @@ export const ContactanosForm = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Aquí puedes agregar la lógica para enviar el formulario
     console.log('Datos del formulario:', formData);
     
-    // Simular envío
     setTimeout(() => {
       alert('¡Mensaje enviado correctamente! Te contactaremos pronto.');
       setFormData({
         nombres: '',
         apellidos: '',
         telefono: '',
-        email: ''
+        email: '',
+        mensaje: ''
       });
       setIsSubmitting(false);
     }, 2000);
   };
 
   return (
-    <div>
+    <div id="contact-form">
       {/* Contact Form Section */}
       <div className="relative overflow-hidden max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-24">
         {/* Blobs */}
@@ -128,6 +152,22 @@ export const ContactanosForm = () => {
                     placeholder="tu@email.com"
                   />
                 </div>
+              </div>
+
+              {/* Campo de Mensaje */}
+              <div className="group">
+                <label htmlFor="mensaje" className="block text-sm font-semibold text-gray-700 mb-2">
+                  Mensaje o Consulta
+                </label>
+                <textarea
+                  id="mensaje"
+                  name="mensaje"
+                  value={formData.mensaje}
+                  onChange={handleChange}
+                  rows="6"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#10b981] focus:border-transparent transition-all duration-300 bg-white/50 backdrop-blur-sm resize-none"
+                  placeholder="Cuéntanos en qué podemos ayudarte, qué producto te interesa, o cualquier consulta que tengas..."
+                />
               </div>
 
               {/* Botón de Envío */}
